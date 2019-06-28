@@ -6,7 +6,7 @@ import  logging
 
 config = {
     "user":"user_db_user",
-    "password":"1209.Ryota",
+    "password":"qazwsx",
     "host":"localhost",
     "port":"3306",
     "database":"USERDB",
