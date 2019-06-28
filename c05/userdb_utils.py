@@ -97,7 +97,9 @@ def is_already_exits(username):
     cnx.autocommit = False
     try:
         cur = cnx.cursor()
-        if cur.execute("SELECT * FROM users WHERE username=%s",(username,)):
+        cur.execute("SELECT * FROM users WHERE username=%s",(username,))
+        user = cur.fetchone()
+        if user:
             logging.error("User already exist.")
             close_db(cur,cnx)
             return True
