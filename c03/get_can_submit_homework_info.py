@@ -21,8 +21,8 @@ def get_can_submit_homework_info():
             return render_template("w7.html")
 
         #TODO:c9m2とはなんですか？
-        dict_of_homework_info = c9m2(user_id)
-        if dict_of_homework_info is None:
+        homework_list = c9m2(user_id)
+        if homework_list is None:
             logging.error("failed get from c9m2")
             return render_template("w7.html")
         else:
@@ -30,10 +30,7 @@ def get_can_submit_homework_info():
 
         logging.info("success get_can_submit_homework_info")
 
-        str_json = json.dumps(dict_of_homework_info, ensure_ascii=False)
-
-        #return render_template("w7.html", str_json)
-        return render_template("w7.html")
+        return render_template("w7.html", homework_list=homework_list)
 
 
 # コンポーネント9(c9)にあるはずのモジュール2(m2)です
