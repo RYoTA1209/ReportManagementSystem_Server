@@ -32,10 +32,11 @@
         var bar = document.getElementById('js-progressbar');
 
         UIkit.upload('.js-upload', {
-
-            url: '',
+            //TODO:ポスト先のURLを指定する.
+            url: '/receive_uploaded_file',
             multiple: true,
 
+            //TODO:フォームを送信した時データがどこにあるかUIKITのレファレンスから探す
             beforeSend: function () {
                 console.log('beforeSend', arguments);
             },

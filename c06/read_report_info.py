@@ -30,5 +30,6 @@ def read_report_info(user_id):
     cnx.close()
     logging.info("close connector")
 
+    #TODO:users_repot_infoがスコープの範囲外なので違うのでエラーになってます
     # return list
     return users_report_info

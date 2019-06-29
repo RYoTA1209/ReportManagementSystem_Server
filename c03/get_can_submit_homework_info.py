@@ -11,6 +11,7 @@ def get_can_submit_homework_info():
 
     if request.method == 'GET':
 
+        #TODO:username is in session['username']
         # get userID from request
         user_id = request.args.get('userID')
         if user_id is None:
@@ -19,7 +20,7 @@ def get_can_submit_homework_info():
             return render_template("w7.html")
         else:
             logging.debug("request has userID")
-
+        #TODO:c9m2とはなんですか？
         dict_of_homework_info = c9m2(user_id)
         if dict_of_homework_info is None:
             logging.error("failed get from c9m2")

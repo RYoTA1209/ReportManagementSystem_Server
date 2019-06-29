@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Blueprint, render_template
+from flask import Flask, request, jsonify, Blueprint, render_template, session
 import logging
 import os
 
@@ -33,12 +33,13 @@ def upload_file():
             return render_template("w9.html")
 
         # get data from post request
-        user_id = request.form['userID']
-        homework_id = request.form['homeworkID']
-
+        # user_id = request.form['userID']
+        user_id = session['username']
+        # homework_id = request.form['homeworkID']
+        homework_id = session['homeworkID']
         # check can int(str)
         try:
-            int(user_id)
+
             int(homework_id)
         except ValueError:
             logging.error("user_id or homework_id cannot format int")
