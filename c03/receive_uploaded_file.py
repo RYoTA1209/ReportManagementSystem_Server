@@ -25,21 +25,19 @@ def upload_file():
         if 'uploadedFile' not in request.files:
             logging.error("request don't have uploadedFile")
             return render_template("w9.html")
-        if 'userID' not in request.form:
-            logging.error("request don't have userID")
+        if 'username' in session:
+            user_id = session['username']
+            logging.info("get user_id from session")
+        else:
+            logging.error("session don't have userID")
             return render_template("w9.html")
         if 'homeworkID' not in request.form:
             logging.error("request don't have homeworkID")
             return render_template("w9.html")
+        else:
+            homework_id = request.form['homeworkID']
 
-        # get data from post request
-        # user_id = request.form['userID']
-        user_id = session['username']
-        # homework_id = request.form['homeworkID']
-        homework_id = session['homeworkID']
-        # check can int(str)
         try:
-
             int(homework_id)
         except ValueError:
             logging.error("user_id or homework_id cannot format int")
