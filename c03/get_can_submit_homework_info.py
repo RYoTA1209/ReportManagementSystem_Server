@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, render_template
+from flask import request, jsonify, Blueprint, render_template, session
 import logging
 import json
 
@@ -16,7 +16,6 @@ def get_can_submit_homework_info():
         user_id = request.args.get('userID')
         if user_id is None:
             logging.error("userID not in prams")
-            #return render_template("w7.html", "failed")
             return render_template("w7.html")
         else:
             logging.debug("request has userID")
@@ -24,7 +23,6 @@ def get_can_submit_homework_info():
         dict_of_homework_info = c9m2(user_id)
         if dict_of_homework_info is None:
             logging.error("failed get from c9m2")
-            #return render_template("w7.html", "failed")
             return render_template("w7.html")
         else:
             logging.info("getting from c9m2 is success")
@@ -35,3 +33,24 @@ def get_can_submit_homework_info():
 
         #return render_template("w7.html", str_json)
         return render_template("w7.html")
+
+
+# コンポーネント9(c9)にあるはずのモジュール2(m2)です
+# テスト用のスタブとして作りました
+# c9m2が完成次第消します
+# user_idを用いて提出できる宿題の情報をDBから検索、結果をリストとして返すものと想定しています
+def c9m2(user_id):
+    homework_list = list()
+
+    ele1 = dict()
+    ele1['homework_id'] = "1"
+    ele1['about'] = "サンプルその1"
+
+    ele2 = dict()
+    ele2['homework_id'] = "2"
+    ele2['about'] = "サンプルその2"
+
+    homework_list.append(ele1)
+    homework_list.append(ele2)
+
+    return homework_list
