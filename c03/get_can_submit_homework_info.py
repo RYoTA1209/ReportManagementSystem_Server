@@ -13,12 +13,13 @@ def get_can_submit_homework_info():
 
         #TODO:username is in session['username']
         # get userID from request
-        user_id = request.args.get('userID')
-        if user_id is None:
-            logging.error("userID not in prams")
-            return render_template("w7.html")
+        if 'username' in session:
+            user_id = session['username']
+            logging.debug("get user_id from session")
         else:
-            logging.debug("request has userID")
+            logging.error("username is not in session")
+            return render_template("w7.html")
+
         #TODO:c9m2とはなんですか？
         dict_of_homework_info = c9m2(user_id)
         if dict_of_homework_info is None:
