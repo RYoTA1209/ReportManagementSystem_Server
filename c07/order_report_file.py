@@ -54,7 +54,7 @@ def order_report_file():
 
     # レポートファイルを読み込む
     report_text_list = report_file.readlines()
-    logging.info("report_text_list"+report_text_list[0])
+    # logging.info("report_text_list"+report_text_list[0])
     # レポートのテキストのリストを一つのテキストにする
     # report_text = ""
     # for line in report_text_list:
