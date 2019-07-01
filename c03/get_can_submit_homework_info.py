@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, render_template
+from flask import request, jsonify, Blueprint, render_template, session, abort
 import logging
 import json
 
@@ -13,25 +13,57 @@ def get_can_submit_homework_info():
 
         #TODO:username is in session['username']
         # get userID from request
-        user_id = request.args.get('userID')
-        if user_id is None:
-            logging.error("userID not in prams")
-            #return render_template("w7.html", "failed")
-            return render_template("w7.html")
+        if 'username' in session:
+            user_id = session['username']
+            logging.debug("get user_id from session")
         else:
-            logging.debug("request has userID")
+            logging.error("username is not in session")
+            abort(404)
+
         #TODO:c9m2とはなんですか？
-        dict_of_homework_info = c9m2(user_id)
-        if dict_of_homework_info is None:
+        homework_list = c9m2(user_id)
+        if homework_list is None:
             logging.error("failed get from c9m2")
-            #return render_template("w7.html", "failed")
-            return render_template("w7.html")
+            abort(404)
         else:
             logging.info("getting from c9m2 is success")
 
         logging.info("success get_can_submit_homework_info")
 
-        str_json = json.dumps(dict_of_homework_info, ensure_ascii=False)
+        return render_template("w7.html", homework_list=homework_list)
 
-        #return render_template("w7.html", str_json)
-        return render_template("w7.html")
+
+# コンポーネント9(c9)にあるはずのモジュール2(m2)です
+# テスト用のスタブとして作りました
+# c9m2が完成次第消します
+# user_idを用いて提出できる宿題の情報をDBから検索、結果をリストとして返すものと想定しています
+def c9m2(user_id):
+    homework_list = list()
+
+    ele1 = dict()
+    ele1['homework_id'] = "1"
+    ele1['about'] = "サンプルその1"
+
+    ele2 = dict()
+    ele2['homework_id'] = "2"
+    ele2['about'] = "サンプルその2"
+
+    homework_list.append(ele1)
+    homework_list.append(ele2)
+
+    return homework_list
+
+# 総合テスト用のスタブ
+@app.route('/get_session')
+def get_session():
+    from flask import session
+    session['username'] = 1
+    session['permission'] = 0
+    return "get session"
+
+# hrefで画面遷移ができなくなるやつへの対処
+# hrefで直接htmlを参照させるのではなく、
+# flaskでレンダリングさせる
+@app.route('/render_window/<window_name>')
+def get_templates(window_name):
+    return render_template(window_name,)

@@ -17,10 +17,11 @@ def read_report_info(user_id):
         logging.error("failed getting connector")
         return None
 
+    users_report_info_list = list()
     try:
         cursor = cnx.cursor(dictionary=True)
         cursor.execute(search_users_reports, (user_id, ))
-        users_report_info = cursor.fetchall()
+        users_report_info_list = cursor.fetchall()
         logging.info("reading report info from db is success")
     except mysql.connector.Error as err:
         logging.error("failed search users reports")
@@ -32,4 +33,4 @@ def read_report_info(user_id):
 
     #TODO:users_repot_infoがスコープの範囲外なので違うのでエラーになってます
     # return list
-    return users_report_info
+    return users_report_info_list
