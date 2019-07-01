@@ -3,7 +3,7 @@ import mysql.connector
 import logging
 
 search_report_file_path = (
-    "SELECT filePath FROM test_table "
+    "SELECT reportFilePath FROM test_table "
     "WHERE userID = %s AND homeworkID = %s"
 )
 
@@ -15,6 +15,7 @@ def read_report_file_path(user_id, homework_id):
         logging.error("failed getting connector")
         return None
 
+    report_file_path_list = list()
     try:
         cursor = cnx.cursor()
         cursor.execute(search_report_file_path, (user_id, homework_id))
@@ -28,4 +29,8 @@ def read_report_file_path(user_id, homework_id):
     logging.info("close connector")
 
     # return list
-    return report_file_path_list[0]
+    if len(report_file_path_list)==0:
+        return ""
+    else:
+        return report_file_path_list[0][0]
+

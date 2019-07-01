@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='parent.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
+    <title>課題提出</title>
+</head>
+
+<body>
+    <form class="parent">
+        <h1 class="uk-article-title">課題提出</h1>
+        <p class="uk-text-muted">提出する課題を選択してください</p>
+        <ul>
+            {{% for homework in homework_dict %}}
+            <li>{{ homework.about_homework }}</li>
+            {{% endfor %}}
+        </ul>
+        <div class="js-upload uk-placeholder uk-text-center">
+            <span uk-icon="icon: cloud-upload"></span>
+            <span class="uk-text-middle">ファイルをドロップ　または</span>
+            <div uk-form-custom >
+                <input type="file" id="drop_form">
+                <span class="uk-link">ファイルを選択</span>
+            </div>
+        </div>
+    </div>
+    <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+    <input type="button" action="is_file_exist()">
+
+    <script>
+        let drop_form = document.getElementById("drop_form")
+        function get_file_name(e){
+            alert("called")
+            e.stopPropagation()
+            e.preventDefault()
+        }
+        drop_form.addEventListener('change', get_file_name, false)
+    </script>
+
+</body>
+</html>

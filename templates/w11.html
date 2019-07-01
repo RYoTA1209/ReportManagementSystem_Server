@@ -17,12 +17,12 @@
         <h1 class="uk-article-title">ファイル一覧</h1>
         <ul>
             {% for line in r_list %}
-            <li>{{ line }} :
-                <form action="etsuran" method="post" style="display:inline;">
-                    <a class="uk-button uk-button-secondary uk-button-small " name="assignment_id" value="{{ line['homeworkID'] }}">閲覧</a>
+            <li>{{ line.homeworkID }} :
+                <form action="etsuran" method="post">
+                    <input type="submit" class="uk-button uk-button-secondary uk-button-small " name="assignment_id" value="{{ line.homeworkID }}">閲覧</input>
                 </form>
-                <form action="sakujo" method="post" style="display:inline;">
-                    <a class="uk-button uk-button-danger uk-button-small" name="assignment_id" value="{{ line['homeworkID'] }}">削除</a>
+                <form action="sakujo" method="post">
+                    <input type="submit" class="uk-button uk-button-danger uk-button-small" name="assignment_id" value="{{ line.homeworkID }}">削除</input>
                 </form>
             </li>
             {% endfor %}
