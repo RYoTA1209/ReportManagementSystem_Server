@@ -29,11 +29,16 @@
         <p>{{ r_dict["feedback_text"] }}</p>
         {% elif session["permission"]==1 %}
         <form action="feedback" method="post">
-            <textarea name="feedback_text">フィードバックを入力</textarea><br>
-            <input type="submit" value="コメント">
+            <textarea name="feedback_text" rows="4" cols="50">フィードバックを入力</textarea><br>
+            <input class="uk-button uk-button-primary uk-button-large" type="submit" value="コメント">
             <input type="hidden" name="assignment_id" value="{{ r_dict["assignment_id"] }}">
         </form>
         {% endif %}
+    </div>
+    <br>
+    <br>
+    <div class="uk-button">
+        <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
     </div>
 </body>
 </html>
