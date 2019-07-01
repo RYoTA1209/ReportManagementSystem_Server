@@ -17,7 +17,7 @@
         <h1 class="uk-article-title">ファイル一覧</h1>
         <ul>
             {% for line in r_list %}
-            <li>{{ line["reprtFilePath"] }} :
+            <li>{{ line }} :
                 <form action="etsuran" method="post">
                     <a class="uk-button uk-button-secondary uk-button-small " name="assignment_id" value="{{ line['homeworkID'] }}">閲覧</a>
                 </form>
