@@ -57,8 +57,8 @@ def c9m2(user_id):
 @app.route('/get_session')
 def get_session():
     from flask import session
-    session['username'] = 1
-    session['permission'] = 0
+    session['username'] = 123
+    session['permission'] = 1
     return "get session"
 
 # hrefで画面遷移ができなくなるやつへの対処
