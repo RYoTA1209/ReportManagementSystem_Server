@@ -31,7 +31,7 @@
         <form action="feedback" method="post">
             <textarea name="feedback_text">フィードバックを入力</textarea><br>
             <input type="submit" value="コメント">
-            <input type="hidden" name="assignment_id" value="{{ assignment_id }}">
+            <input type="hidden" name="assignment_id" value="{{ r_dict["assignment_id"] }}">
         </form>
         {% endif %}
     </div>
