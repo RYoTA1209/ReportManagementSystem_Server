@@ -27,7 +27,7 @@
         <p class="uk-text-muted">フィードバック</p>
         {% if session["permission"]==0 %}
         <p>{{ r_dict["feedback_text"] }}</p>
-        {% else if session["permission"]==1 %}
+        {% elif session["permission"]==1 %}
         <form action="feedback" method="post">
             <textarea name="feedback_text">フィードバックを入力</textarea><br>
             <input type="submit" value="コメント">

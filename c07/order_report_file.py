@@ -46,7 +46,7 @@ def order_report_file():
 
     try:
         # レポートファイルを開く
-        report_file = open(report_file_path, "r", encoding="UTF-8")
+        report_file = open(report_file_path, "r", encoding="utf-8")
     except PermissionError:
         logging.error("order_report_file: パーミッションエラー")
     except IOError:
@@ -54,7 +54,7 @@ def order_report_file():
 
     # レポートファイルを読み込む
     report_text_list = report_file.readlines()
-
+    logging.info("report_text_list"+report_text_list[0])
     # レポートのテキストのリストを一つのテキストにする
     # report_text = ""
     # for line in report_text_list:

@@ -44,7 +44,7 @@ def record_report_to_db(save_file_path, user_id, homework_id):
         cursor = cnx.cursor()
 
         # check did user submit
-        cursor.execute(check_user_submit, (user_id, homework_id))
+        cursor.execute(check_user_submit, (user_id, homework_id,))
         # did not submit
         if cursor.fetchone() is None:
             logging.info("user did not submitted")

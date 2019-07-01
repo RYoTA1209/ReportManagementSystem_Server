@@ -16,8 +16,8 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-@app.route('/receive_uploaded_file', methods=['POST', 'GET'])
+#                                            ['POST','GET']
+@app.route('/receive_uploaded_file', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
 
@@ -59,7 +59,7 @@ def upload_file():
             return render_template("w9.html")
 
         # save uploaded file on server
-        save_file_path = save_uploaded_file(user_id, homework_id, uploaded_file, UPLOAD_FOLDER)
+        save_file_path = save_uploaded_file(str(user_id), homework_id, uploaded_file, UPLOAD_FOLDER)
 
         # if save file success insert to db
         if save_file_path == "":
