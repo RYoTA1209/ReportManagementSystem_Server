@@ -18,10 +18,10 @@
         <ul>
             {% for line in r_list %}
             <li>{{ line }} :
-                <form action="etsuran" method="post">
+                <form action="etsuran" method="post" style="display:inline;">
                     <a class="uk-button uk-button-secondary uk-button-small " name="assignment_id" value="{{ line['homeworkID'] }}">閲覧</a>
                 </form>
-                <form action="sakujo" method="post">
+                <form action="sakujo" method="post" style="display:inline;">
                     <a class="uk-button uk-button-danger uk-button-small" name="assignment_id" value="{{ line['homeworkID'] }}">削除</a>
                 </form>
             </li>
