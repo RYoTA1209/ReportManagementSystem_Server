@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint, render_template, session
+from flask import request, jsonify, Blueprint, render_template, session, abort
 import logging
 import json
 
@@ -18,13 +18,13 @@ def get_can_submit_homework_info():
             logging.debug("get user_id from session")
         else:
             logging.error("username is not in session")
-            return render_template("w7.html")
+            abort(404)
 
         #TODO:c9m2とはなんですか？
         homework_list = c9m2(user_id)
         if homework_list is None:
             logging.error("failed get from c9m2")
-            return render_template("w7.html")
+            abort(404)
         else:
             logging.info("getting from c9m2 is success")
 
@@ -52,3 +52,18 @@ def c9m2(user_id):
     homework_list.append(ele2)
 
     return homework_list
+
+# 総合テスト用のスタブ
+@app.route('/get_session')
+def get_session():
+    from flask import session
+    session['username'] = 1
+    session['permission'] = 0
+    return "get session"
+
+# hrefで画面遷移ができなくなるやつへの対処
+# hrefで直接htmlを参照させるのではなく、
+# flaskでレンダリングさせる
+@app.route('/render_window/<window_name>')
+def get_templates(window_name):
+    return render_template(window_name,)

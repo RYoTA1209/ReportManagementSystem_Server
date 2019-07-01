@@ -37,6 +37,8 @@ def index():
 def home():
     return  render_template('w5.html')
 
+
+
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(module)-18s %(funcName)-10s %(lineno)4s: %(message)s'
