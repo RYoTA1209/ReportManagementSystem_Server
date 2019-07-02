@@ -1,6 +1,7 @@
 # c9m1
 from .connect_homework_db import connect_report_db, close_db
 import logging
+import mysql.connector
 
 insert_homework_to_db = (
     "INSERT INTO test_table "
