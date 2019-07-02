@@ -32,6 +32,7 @@ def login():
         if bcrypt.hashpw(password,user_info[1].encode('utf-8')) == user_info[1].encode('utf-8'):
             session['username'] = user_info[0]
             session['permission'] = user_info[2]
+            session['userid'] = user_info[3]
             return  redirect(url_for('home'))
         else:
             logging.error('User and password not match.')
