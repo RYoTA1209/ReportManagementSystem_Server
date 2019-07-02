@@ -20,6 +20,8 @@ def order_report_list():
     # if 'user_id' not in request.form:
     #     logging.error("order_report_list: user_idをフォームから読み込めませんでした。")
 
+    #TODO:useridを追加したので修正してください
+
     # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
     if session["permission"] == 0:
         # フォームから受け取ったIDを格納

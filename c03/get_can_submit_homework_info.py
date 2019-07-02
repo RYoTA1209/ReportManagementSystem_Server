@@ -11,7 +11,8 @@ def get_can_submit_homework_info():
 
     if request.method == 'GET':
 
-        #TODO:username is in session['username']
+        #TODO:useridを追加したので修正してください
+
         # get userID from request
         if 'username' in session:
             user_id = session['username']
@@ -20,7 +21,6 @@ def get_can_submit_homework_info():
             logging.error("username is not in session")
             abort(404)
 
-        #TODO:c9m2とはなんですか？
         homework_list = c9m2(user_id)
         if homework_list is None:
             logging.error("failed get from c9m2")

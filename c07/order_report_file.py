@@ -29,9 +29,11 @@ def order_report_file():
         logging.error("order_report_file: assignment_idをフォームから読み込めませんでした。")
 
     # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
+
     if session["permission"] == 0:
         # フォームから受け取ったIDを格納
         # user_id = request.form['user_id']
+        # TODO:useridを追加したので修正してください
         user_id = session["username"]
     else:
         user_id = request.form['user_id']  # w18にはuser_idをformに
