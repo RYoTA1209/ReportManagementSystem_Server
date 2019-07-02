@@ -7,14 +7,13 @@ import logging
 
 # レポート管理部
 from c06.read_report_file_path import read_report_file_path
-from c06.read_feedback import  read_feedback
+from c06.read_feedback import read_feedback
 
 # 文字コードによるバグの修正
 import chardet
 
 order_report_file_app = Blueprint('order_report_file_app', __name__)
 app = order_report_file_app
-
 
 
 # レポートとフィードバックを得る関数

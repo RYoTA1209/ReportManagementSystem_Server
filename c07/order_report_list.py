@@ -43,3 +43,4 @@ def order_report_list():
 
     # レポートのリストのテキストを返す
     return render_template("w11.html", r_list=list)
+

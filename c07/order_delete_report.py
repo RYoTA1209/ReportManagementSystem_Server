@@ -4,13 +4,11 @@ from flask import Flask, render_template, session, Blueprint
 from flask import request
 import logging
 
-
 # レポート管理部
 from c06.delete_report_from_db_and_server import delete_report_from_db_and_server
 
 order_delete_report_app = Blueprint('order_delete_report_app', __name__)
 app = order_delete_report_app
-
 
 
 # レポートの削除依頼をレポート管理部に依頼する関数
