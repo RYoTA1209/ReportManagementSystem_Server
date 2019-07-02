@@ -5,10 +5,12 @@ from flask import request
 # from flask import jsonify
 import logging
 
-
 # レポート管理部
 from c06.read_report_file_path import read_report_file_path
 from c06.read_feedback import  read_feedback
+
+# 文字コードによるバグの修正
+import chardet
 
 order_report_file_app = Blueprint('order_report_file_app', __name__)
 app = order_report_file_app
@@ -48,6 +50,7 @@ def order_report_file():
     # レポート管理部へID、課題情報を渡してレポートファイルのパスを得る
     report_file_path = read_report_file_path(user_id, assignment_id)
 
+    '''
     try:
         # レポートファイルを開く
         report_file = open(report_file_path, "r", encoding="utf-8")
@@ -55,6 +58,17 @@ def order_report_file():
         logging.error("order_report_file: パーミッションエラー")
     except IOError:
         logging.error("order_report_file: 入出力エラー")
+    '''
+        # レポートファイルを開く
+    try:
+        with open(report_file_path, "rb") as f:
+            character_code = chardet.detect(f.read())['encoding']
+        report_file = open(report_file_path, "r", encoding=character_code)
+    except PermissionError:
+        logging.error("order_report_file: パーミッションエラー")
+    except IOError:
+        logging.error("order_report_file: 入出力エラー")
+
 
     # レポートファイルを読み込む
     report_text_list = report_file.readlines()
@@ -71,10 +85,11 @@ def order_report_file():
     result_dict = {
         "report_text_list": report_text_list,
         "feedback_text": feedback_text,
-        "assignment_id": assignment_id
+        "assignment_id": assignment_id,
+        "user_id": user_id
     }
     # print(report_text)
-
+    print(feedback_text)
     # jsonファイル風にする
     # jsonify_result = jsonify(result_dict)
 

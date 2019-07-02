@@ -18,8 +18,8 @@ app = order_store_feedback_app
 def order_store_feedback():
 
     # user_idが見つからなかったらエラーを返す
-    # if 'user_id' not in request.form:
-    #     logging.error("order_store_feedback: user_idをフォームから読み込めませんでした。")
+    if 'user_id' not in request.form:
+        logging.error("order_store_feedback: user_idをフォームから読み込めませんでした。")
 
     # assignment_idが見つからなかったらエラーを返す
     if 'assignment_id' not in request.form:
@@ -30,8 +30,7 @@ def order_store_feedback():
         logging.error("order_store_feedback: feedback_textをフォームから読み込めませんでした。")
 
     # フォームから受け取ったIDを格納
-    # user_id = request.form['user_id']
-    user_id = session["user_id"]
+    user_id = request.form['user_id']
 
     # フォームから受け取った課題情報を格納
     assignment_id = request.form['assignment_id']

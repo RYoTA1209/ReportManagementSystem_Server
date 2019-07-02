@@ -19,7 +19,8 @@
             {% for line in u_list %}
             <li>{{ line }} :
                 <form action="list" method="post" style="display:inline;">
-                    <input type="submit" class="uk-button uk-button-secondary uk-button-small " name="user_id" value="{{ line }}">選択</input>
+                    <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="選択">
+                    <input type="hidden" name="user_id" value="{{ line }}">
                 </form>
             </li>
             {% endfor %}
