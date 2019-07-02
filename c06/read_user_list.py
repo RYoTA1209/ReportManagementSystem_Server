@@ -31,3 +31,8 @@ def read_user_list():
         return list()
 
     return result
+
+
+if __name__ == '__main__':
+
+    print(read_user_list)
