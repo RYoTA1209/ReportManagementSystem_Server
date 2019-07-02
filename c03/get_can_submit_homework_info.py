@@ -57,7 +57,8 @@ def c9m2(user_id):
 @app.route('/get_session')
 def get_session():
     from flask import session
-    session['username'] = 123
+
+    session['username'] = 1111
     session['permission'] = 1
     return "get session"
 
@@ -66,4 +67,4 @@ def get_session():
 # flaskでレンダリングさせる
 @app.route('/render_window/<window_name>')
 def get_templates(window_name):
-    return render_template(window_name,)
+    return render_template(window_name)

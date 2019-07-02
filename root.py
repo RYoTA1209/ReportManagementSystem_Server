@@ -11,6 +11,8 @@ from c07.order_report_list import order_report_list_app
 from c04.login import login_app
 from c04.register import register_app
 
+# add
+from c07.order_user_list import order_user_list_app
 # from c03.config import c03_module
 
 import logging
@@ -26,6 +28,9 @@ app.register_blueprint(order_store_feedback_app)
 app.register_blueprint(order_report_list_app)
 app.register_blueprint(login_app)
 app.register_blueprint(register_app)
+
+# add
+app.register_blueprint(order_user_list_app)
 
 app.secret_key = os.urandom(24)
 
@@ -46,4 +51,4 @@ logging.basicConfig(
 
 if __name__ == '__main__':
     logging.debug("run app")
-    app.run(host="0.0.0.0", port=80, threaded=True)
+    app.run(host="localhost", port=80, threaded=True)

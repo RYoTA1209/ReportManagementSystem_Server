@@ -25,9 +25,13 @@ def order_delete_report():
     if 'assignment_id' not in request.form:
         logging.error("order_report_file: assignment_idをフォームから読み込めませんでした。")
 
-    # フォームから受け取ったIDを格納
-    # user_id = request.form['user_id']
-    user_id = session["username"]
+    # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
+    if session["permission"] == 0:
+        # フォームから受け取ったIDを格納
+        # user_id = request.form['user_id']
+        user_id = session["username"]
+    else:
+        user_id = request.form['user_id']  # w18にはuser_idをformに
 
     # フォームから受け取った課題情報を格納
     assignment_id = request.form['assignment_id']

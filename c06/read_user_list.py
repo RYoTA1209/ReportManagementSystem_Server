@@ -17,7 +17,7 @@ def read_user_list():
 
     try:
         cursor = cnx.cursor()
-        cursor.execute(read_user_list)
+        cursor.execute(read_user_list_who_had_submitted)
         result = cursor.fetchall()
         logging.info("get user list from db is success")
 
@@ -29,6 +29,10 @@ def read_user_list():
         logging.error(err)
         close_db(cursor, cnx)
         return list()
+    print(result)
+
+    for i in range(len(result)):
+        result[i] = result[i][0]
 
     return result
 
