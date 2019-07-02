@@ -4,7 +4,6 @@ from flask import Flask, render_template, session, Blueprint
 from flask import request
 import logging
 
-
 # レポート管理部
 # from c03.c06.write_feedback import write_feedback
 from c06.write_feedback import write_feedback
