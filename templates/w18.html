@@ -1,4 +1,3 @@
-<!--このページはw5.htmlへ統合-->
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -10,21 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js"></script>
-    <title>指導者ホーム</title>
+    <title>閲覧</title>
 </head>
 
 <body>
     <div class="parent">
-        <h1 class="uk-article-title">指導者ホーム</h1>
-        <p class="uk-text-muted">指導者ホームへようこそ</p>
-        <p class="uk-text-muted">ここでは、課題の情報登録、閲覧ができます</p>
+        <h1 class="uk-article-title">生徒一覧</h1>
+        <ul>
+            {% for line in u_list %}
+            <li>{{ line }} :
+                <form action="list" method="post" style="display:inline;">
+                    <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="選択">
+                    <input type="hidden" name="user_id" value="{{ line }}">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <br>
         <div class="uk-button">
-            <a class="uk-button uk-button-secondary uk-button-large " href="w3.html">ファイル生成</a>
-            <a class="uk-button uk-button-primary uk-button-large " href="w14.html">課題情報登録</a>
-            <a class="uk-button uk-button-default uk-button-large" href="w18.html">閲覧</a>
+            <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
         </div>
-
     </div>
 </body>
-
 </html>
+
+<!-- 改変@al17055 -->
