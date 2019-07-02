@@ -47,8 +47,8 @@ def register():
             logging.error('Cant create new account.User already exist.')
             flash(message='ユーザー名が使用されています。別のユーザー名を入力してください',category='Error')
             return redirect(url_for('register_app.register'))
-
-        if not new_user(username,hash_pass,permission):
+        userid = new_user(username,hash_pass,permission)
+        if userid < 0:
             logging.error('Cant create new account.')
             flash(message='内部エラーが発生しました。時間をおいてもう一度試してください.',category='Error')
             return  redirect(url_for('register_app.register'))
@@ -56,4 +56,5 @@ def register():
         logging.info('New User Created.')
         session['username'] = username
         session['permission'] = permission
+        session['userid'] = userid
         return  redirect(url_for('home'))

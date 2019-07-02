@@ -16,13 +16,21 @@
     <div class="parent">
         <h1 class="uk-article-title">ファイル一覧</h1>
         <ul>
-            {% for line in r_list %}
-            <li>{{ line }} :
-                <form action="etsuran" method="post" style="display:inline;">
-                    <input type="button" class="uk-button uk-button-secondary uk-button-small " name="assignment_id" value="{{ line['homeworkID'] }}">
+            {% for line in r_list.report_list %}
+            <li>{{ line.homeworkID }} :
+                <form action="etsuran" method="post" style="display: inline">
+                    <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="閲覧">
+                    <input type="hidden" name="assignment_id" value="{{ line.homeworkID }}">
+                    {% if session["permission"]==1 %}
+                        <input type="hidden" name="user_id" value="{{ r_list.user_id }}">
+                    {% endif %}
                 </form>
-                <form action="sakujo" method="post" style="display:inline;">
-                    <input type="button" class="uk-button uk-button-danger uk-button-small" name="assignment_id" value="{{ line['homeworkID'] }}">
+                <form action="sakujo" method="post" style="display: inline">
+                    <input type="submit" class="uk-button uk-button-danger uk-button-small" value="削除">
+                    <input type="hidden" name="assignment_id" value="{{ line.homeworkID }}">
+                    {% if session["permission"]==1 %}
+                        <input type="hidden" name="user_id" value="{{ r_list.user_id }}">
+                    {% endif %}
                 </form>
             </li>
             {% endfor %}
@@ -35,5 +43,3 @@
     </div>
 </body>
 </html>
-
-<!-- 改変@al17055 -->

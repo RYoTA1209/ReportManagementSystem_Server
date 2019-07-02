@@ -32,8 +32,12 @@
             <textarea name="feedback_text" rows="4" cols="50">フィードバックを入力</textarea><br>
             <input class="uk-button uk-button-primary uk-button-large" type="submit" value="コメント">
             <input type="hidden" name="assignment_id" value="{{ r_dict["assignment_id"] }}">
+            <input type="hidden" name="user_id" value="{{ r_dict["user_id"] }}">
         </form>
         {% endif %}
+    <div class="uk-button">
+            <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
+        </div>
     </div>
     <br>
     <br>

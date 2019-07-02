@@ -8,6 +8,7 @@ config = {
     "user":"user_db_user",
     "password":"qazwsx",
     "host":"localhost",
+    # "host":"172.21.33.67",
     "port":"3306",
     "database":"USERDB",
     "raise_on_warnings":True,
@@ -40,27 +41,27 @@ def new_user(username,hash_pass,permission):
     cnx = connect_db()
     if not cnx:
         logging.error("failed connect db")
-        return False
+        return -1
 
     cnx.autocommit = False
-
     try:
         cur = cnx.cursor()
         if is_already_exits(username):
             logging.error("Could not create new account.Because User already exits.")
-            return False
-        cur.execute("INSERT INTO users VALUES (%s,%s,%s)",(username,hash_pass,permission))
+            return -1
+        cur.execute("INSERT INTO users VALUES (%s,%s,%s,%s)",(username,hash_pass,permission,0))
     except mysql.connector.Error as e:
         logging.error("Could not create new account.Something error occurred.")
         logging.error(e.msg)
-        return False
+        return -1
 
     cnx.commit()
+    insert_id = cur.lastrowid;
     close_db(cur,cnx)
 
     logging.info("Connector closed.")
     logging.info("Created new Account.")
-    return True
+    return insert_id
 
 
 def fetch_user_info(username):
@@ -82,6 +83,7 @@ def fetch_user_info(username):
             return None
         close_db(cur,cnx)
         logging.info("User fetch successful.")
+        logging.info(user)
         return user
     except mysql.connector.Error as e:
         logging.error("Could not fetch account.Something error occurred.")

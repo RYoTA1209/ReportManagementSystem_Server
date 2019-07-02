@@ -31,10 +31,16 @@ def order_report_list():
     # レポート管理部へIDを渡してレポートリストを得る
     report_list = read_report_info(user_id)
 
+    list = {
+        "report_list": report_list,
+        "user_id": user_id
+    }
+
     # レポートのパスのリストを一つのテキストにする
     # report_path_text = ""
     # for line in report_list:
     #     report_path_text += (line + ",")
 
     # レポートのリストのテキストを返す
-    return render_template("w11.html", r_list=report_list)
+    return render_template("w11.html", r_list=list)
+
