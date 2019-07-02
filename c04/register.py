@@ -48,7 +48,7 @@ def register():
             flash(message='ユーザー名が使用されています。別のユーザー名を入力してください',category='Error')
             return redirect(url_for('register_app.register'))
         userid = new_user(username,hash_pass,permission)
-        if not userid < 0:
+        if userid < 0:
             logging.error('Cant create new account.')
             flash(message='内部エラーが発生しました。時間をおいてもう一度試してください.',category='Error')
             return  redirect(url_for('register_app.register'))
