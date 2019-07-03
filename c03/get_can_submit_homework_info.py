@@ -11,11 +11,9 @@ def get_can_submit_homework_info():
 
     if request.method == 'GET':
 
-        #TODO:useridを追加したので修正してください
-
         # get userID from request
         if 'username' in session:
-            user_id = session['username']
+            user_id = session['userid']
             logging.debug("get user_id from session")
         else:
             logging.error("username is not in session")

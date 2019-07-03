@@ -25,9 +25,9 @@ def upload_file():
         if 'uploadedFile' not in request.files:
             logging.error("request don't have uploadedFile")
             return render_template("w9.html")
-        #TODO:useridを追加したので修正してください
+
         if 'username' in session:
-            user_id = session['username']
+            user_id = session['userid']
             logging.info("get user_id from session")
         else:
             logging.error("session don't have userID")
