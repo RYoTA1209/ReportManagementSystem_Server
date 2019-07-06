@@ -27,8 +27,7 @@ def order_delete_report():
     if session["permission"] == 0:
         # フォームから受け取ったIDを格納
         # user_id = request.form['user_id']
-        # TODO:useridを追加したので修正してください
-        user_id = session["username"]
+        user_id = session["userid"]
     else:
         user_id = request.form['user_id']  # w18にはuser_idをformに
 

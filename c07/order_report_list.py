@@ -20,20 +20,18 @@ def order_report_list():
     # if 'user_id' not in request.form:
     #     logging.error("order_report_list: user_idをフォームから読み込めませんでした。")
 
-    #TODO:useridを追加したので修正してください
-
     # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
     if session["permission"] == 0:
         # フォームから受け取ったIDを格納
         # user_id = request.form['user_id']
-        user_id = session["username"]
+        user_id = session["userid"]
     else:
         user_id = request.form['user_id']  # w18にはuser_idをformに
 
     # レポート管理部へIDを渡してレポートリストを得る
     report_list = read_report_info(user_id)
 
-    list = {
+    report_list = {
         "report_list": report_list,
         "user_id": user_id
     }
@@ -44,5 +42,5 @@ def order_report_list():
     #     report_path_text += (line + ",")
 
     # レポートのリストのテキストを返す
-    return render_template("w11.html", r_list=list)
+    return render_template("w11.html", r_list=report_list)
 
