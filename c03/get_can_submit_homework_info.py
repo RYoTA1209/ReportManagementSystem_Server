@@ -19,7 +19,7 @@ def get_can_submit_homework_info():
             logging.error("username is not in session")
             abort(404)
 
-        homework_list = c9m2(user_id)
+        homework_list = ret_homework_list(user_id)
         if homework_list is None:
             logging.error("failed get from c9m2")
             abort(404)
@@ -31,11 +31,8 @@ def get_can_submit_homework_info():
         return render_template("w7.html", homework_list=homework_list)
 
 
-# コンポーネント9(c9)にあるはずのモジュール2(m2)です
-# テスト用のスタブとして作りました
-# c9m2が完成次第消します
-# user_idを用いて提出できる宿題の情報をDBから検索、結果をリストとして返すものと想定しています
-def c9m2(user_id):
+# 提出できる課題をリストにして返す関数
+def ret_homework_list(user_id):
     homework_list = list()
 
     ele1 = dict()
