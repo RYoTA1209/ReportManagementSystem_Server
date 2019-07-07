@@ -19,20 +19,18 @@ def order_delete_report():
     if 'assignment_id' not in request.form:
         logging.error("order_delete_report: assignment_idをフォームから読み込めませんでした。")
 
-    # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
+    # 生徒からの閲覧か、指導者からの閲覧かによってuser_idの分岐
     if session["permission"] == 0:
-
         # 生徒の場合はセッションから
         user_id = session["userid"]
 
     else:
-
         # user_idが見つからなかったらエラーを返す（指導者のみ）
         if 'user_id' not in request.form:
-            logging.error("order_report_file: user_idをフォームから読み込めませんでした。")
+            logging.error("order_delete_report: user_idをフォームから読み込めませんでした。")
 
         # 指導者の場合はフォームから
-        user_id = request.form['user_id']  # w18にはuser_idをformに
+        user_id = request.form['user_id']
 
     # フォームから受け取った課題番号を格納
     assignment_id = request.form['assignment_id']
@@ -44,5 +42,5 @@ def order_delete_report():
     if success != True:
         logging.error("order_delete_report: レポート削除に例外が発生しました。")
 
-    # W5に遷移
+    # W5に画面遷移
     return render_template("w5.html")
