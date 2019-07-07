@@ -51,15 +51,6 @@ def c9m2(user_id):
 
     return homework_list
 
-# 総合テスト用のスタブ
-@app.route('/get_session')
-def get_session():
-    from flask import session
-
-    session['username'] = 1111
-    session['permission'] = 1
-    return "get session"
-
 # hrefで画面遷移ができなくなるやつへの対処
 # hrefで直接htmlを参照させるのではなく、
 # flaskでレンダリングさせる
