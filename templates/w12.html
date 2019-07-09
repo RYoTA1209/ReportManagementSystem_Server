@@ -24,12 +24,12 @@
             {{line}}<br>
             {% endfor %}
         </p>
-        <p class="uk-text-muted">コメントを送ることができます</p>
+        <p class="uk-text-muted">コメント</p>
         {% if session["permission"]==0 %}
         <p align="left">{{ r_dict["feedback_text"] }}</p>
         {% elif session["permission"]==1 %}
         <form action="feedback" method="post">
-            <textarea name="feedback_text" class="uk-textarea" rows="3" placeholder="コメントを入力"></textarea>
+            <textarea name="feedback_text" class="uk-textarea" rows="3" placeholder="コメントを入力することができます"></textarea>
             <!--<textarea name="feedback_text" rows="4" cols="50">フィードバックを入力</textarea><br>-->
             <br>
             <input class="uk-button uk-button-primary " type="submit" value="送信">
