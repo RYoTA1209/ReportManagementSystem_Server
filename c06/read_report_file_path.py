@@ -33,4 +33,3 @@ def read_report_file_path(user_id, homework_id):
         return ""
     else:
         return report_file_path_list[0][0]
-
