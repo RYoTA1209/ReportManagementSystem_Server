@@ -14,4 +14,15 @@
     white-space:nowrap;
 }
 
+.parent ul{
+    padding: 20px 40px 20px 30px;
+}
+
+.parent li{
+    padding: 20px 40px 20px 30px;
+}
+
+.parent ol{
+    padding: 20px 40px 20px 30px;
+}
 

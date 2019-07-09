@@ -15,7 +15,9 @@
 <body>
     <div class="parent">
         <h1 class="uk-article-title">ファイル一覧</h1>
-            {% for line in r_list.report_list %}
+    <p class="uk-text-muted">閲覧したいファイルを選択してください</p>
+            <ul class="uk-list">
+                <li>{% for line in r_list.report_list %}
             {{ line.homeworkID }} :
                 <form action="etsuran" method="post" style="display: inline">
                     <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="閲覧">
@@ -30,7 +32,10 @@
                     {% if session["permission"]==1 %}
                         <input type="hidden" name="user_id" value="{{ r_list.user_id }}">
                     {% endif %}
+                </li>
                 </form>
+                    </ul>
+
             {% endfor %}
         <br>
         <br>

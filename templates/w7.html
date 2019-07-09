@@ -17,17 +17,27 @@
     <h1 class="uk-article-title">課題提出</h1>
     <p class="uk-text-muted">提出する課題を選択してください</p>
     <form method="POST" action="receive_uploaded_file"  enctype="multipart/form-data">
-      <ol>
+<ul class="uk-list">
         {% for homework in homework_list %}
         <li><input  class="uk-radio" type="radio" name="homeworkID" value="{{ homework.homework_id }}" required>{{ homework.about }}
         {% endfor %}
-      </ol>
-        <input type="file" id="drop_place" name="uploadedFile"><br>
+</ul>
+
+        <!--<input type="file" id="drop_place" name="uploadedFile"><br>
         <br>
     <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-        <input class="uk-button uk-button-primary uk-button-large"  type="submit" value="送信">
+        <input class="uk-button uk-button-primary uk-button-large"  type="submit" value="送信">-->
+    <div class="uk-margin" uk-margin>
+        <div uk-form-custom="target: true">
+            <input type="file" name="uploadedFile">
+            <input class="uk-input uk-form-width-medium" type="text" placeholder="ファイルを選択" disabled>
+        </div>
+        <input class="uk-button uk-button-primary " type="submit" value="送信">
+    </div>
+     <a class="uk-button uk-button-danger uk-button-large " href="/home">戻る</a>
 
     </form>
+
   </div>
 
   </body>
