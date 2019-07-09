@@ -19,31 +19,31 @@
     <div class="parent">
         <h1 class="uk-article-title">閲覧画面</h1>
         <p class="uk-text-muted">ここでは提出した課題の内容を確認できます</p>
-        <p>
+        <p align="left">
             {% for line in r_dict["report_text_list"] %}
             {{line}}<br>
             {% endfor %}
         </p>
-        <p class="uk-text-muted">フィードバック</p>
+        <p class="uk-text-muted">コメントを送ることができます</p>
         {% if session["permission"]==0 %}
-        <p>{{ r_dict["feedback_text"] }}</p>
+        <p align="left">{{ r_dict["feedback_text"] }}</p>
         {% elif session["permission"]==1 %}
         <form action="feedback" method="post">
-            <textarea name="feedback_text" rows="4" cols="50">フィードバックを入力</textarea><br>
-            <input class="uk-button uk-button-primary uk-button-large" type="submit" value="コメント">
+            <textarea name="feedback_text" class="uk-textarea" rows="3" placeholder="コメントを入力"></textarea>
+            <!--<textarea name="feedback_text" rows="4" cols="50">フィードバックを入力</textarea><br>-->
+            <br>
+            <input class="uk-button uk-button-primary " type="submit" value="送信">
             <input type="hidden" name="assignment_id" value="{{ r_dict["assignment_id"] }}">
             <input type="hidden" name="user_id" value="{{ r_dict["user_id"] }}">
         </form>
         {% endif %}
+    <br>
     <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
         </div>
     </div>
     <br>
     <br>
-    <div class="uk-button">
-        <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
-    </div>
 </body>
 </html>
 

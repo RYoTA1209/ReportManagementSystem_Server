@@ -15,17 +15,17 @@
 <body>
     <div class="parent">
         <h1 class="uk-article-title">生徒一覧</h1>
-        <ul>
-            {% for line in u_list %}
-            <li>{{ line }} :
+    <p class="uk-text-muted">生徒を選択してください</p>
+    <ul class="uk-list">
+    {% for line in u_list %}
+           <li> {{ line }} :
                 <form action="list" method="post" style="display:inline;">
                     <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="選択">
                     <input type="hidden" name="user_id" value="{{ line }}">
                 </form>
-            </li>
+           </li>
             {% endfor %}
-        </ul>
-        <br>
+    </ul>
         <br>
         <div class="uk-button">
             <a class="uk-button uk-button-danger uk-button-large " href="javascript:history.back();">戻る</a>
