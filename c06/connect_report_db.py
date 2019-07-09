@@ -8,7 +8,8 @@ import logging
 config = {
     'user': 'report_db_user',
     'password': 'qazwsx',
-    'host': 'localhost',
+    #'host': 'localhost',
+    'host': '172.21.33.67',
     'database': 'report_db',
     'raise_on_warnings': True,
     'charset': 'utf8'

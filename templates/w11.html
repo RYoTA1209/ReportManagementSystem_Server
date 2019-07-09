@@ -15,9 +15,8 @@
 <body>
     <div class="parent">
         <h1 class="uk-article-title">ファイル一覧</h1>
-        <ul>
             {% for line in r_list.report_list %}
-            <li>{{ line.homeworkID }} :
+            {{ line.homeworkID }} :
                 <form action="etsuran" method="post" style="display: inline">
                     <input type="submit" class="uk-button uk-button-secondary uk-button-small " value="閲覧">
                     <input type="hidden" name="assignment_id" value="{{ line.homeworkID }}">
@@ -32,9 +31,7 @@
                         <input type="hidden" name="user_id" value="{{ r_list.user_id }}">
                     {% endif %}
                 </form>
-            </li>
             {% endfor %}
-        </ul>
         <br>
         <br>
         <div class="uk-button">

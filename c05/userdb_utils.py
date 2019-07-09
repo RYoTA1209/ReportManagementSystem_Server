@@ -7,8 +7,8 @@ import  logging
 config = {
     "user":"user_db_user",
     "password":"qazwsx",
-    "host":"localhost",
-    # "host":"172.21.33.67",
+    #"host":"localhost",
+    "host": "172.21.33.67",
     "port":"3306",
     "database":"USERDB",
     "raise_on_warnings":True,

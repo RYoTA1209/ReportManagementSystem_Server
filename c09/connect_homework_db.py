@@ -8,7 +8,8 @@ import logging
 config = {
     'user': 'homework_db_user',
     'password': 'qazwsx',
-    'host': 'localhost',
+    #'host': 'localhost',
+    'host': '172.21.33.67',
     'database': 'homework_db',
     'raise_on_warnings': True,
     'charset': 'utf8'
