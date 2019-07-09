@@ -60,10 +60,12 @@ def order_report_file():
         logging.error("order_report_file: 入出力エラー")
     '''
 
+    report_file=None
     # レポートファイルを開く
     try:
         with open(report_file_path, "rb") as f:
             character_code = chardet.detect(f.read())['encoding']
+        global report_file
         report_file = open(report_file_path, "r", encoding=character_code)
 
     # パーミッションエラー
@@ -75,7 +77,10 @@ def order_report_file():
         logging.error("order_report_file: 入出力エラー")
 
     # レポートファイルを読み込む
-    report_text_list = report_file.readlines()
+    if(report_file is not None):
+        report_text_list = report_file.readlines()
+    else:
+        report_text_list = list()
     # logging.info("report_text_list"+report_text_list[0])
 
     # レポートのテキストのリストを一つのテキストにする
