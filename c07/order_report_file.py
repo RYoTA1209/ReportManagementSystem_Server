@@ -20,34 +20,34 @@ app = order_report_file_app
 @app.route('/etsuran', methods=['GET', 'POST'])
 def order_report_file():
 
-    # user_idが見つからなかったらエラーを返す
-    # if 'user_id' not in request.form:
-    #     logging.error("order_report_file: user_idをフォームから読み込めませんでした。")
-
     # assignment_idが見つからなかったらエラーを返す
     if 'assignment_id' not in request.form:
         logging.error("order_report_file: assignment_idをフォームから読み込めませんでした。")
 
-    # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
-
+    # 生徒からの閲覧か、指導者からの閲覧かによってuser_idの分岐
     if session["permission"] == 0:
-        # フォームから受け取ったIDを格納
-        # user_id = request.form['user_id']
+        # 生徒の場合はセッションから
         user_id = session["userid"]
-    else:
-        user_id = request.form['user_id']  # w18にはuser_idをformに
 
-    # フォームから受け取った課題情報を格納
+    else:
+        # user_idが見つからなかったらエラーを返す（指導者のみ）
+        if 'user_id' not in request.form:
+            logging.error("order_report_file: user_idをフォームから読み込めませんでした。")
+
+        # 指導者の場合はフォームから
+        user_id = request.form['user_id']
+
+    # フォームから受け取った課題番号を格納
     assignment_id = request.form['assignment_id']
 
-    # # 上に四行をコメントアウトしてここを復活でTT可能
+    # 単体テスト例
     # # フォームから受け取ったIDを格納
     # user_id = "1"
     #
-    # # フォームから受け取った課題情報を格納
+    # # フォームから受け取った課題番号を格納
     # assignment_id = "1"
 
-    # レポート管理部へID、課題情報を渡してレポートファイルのパスを得る
+    # レポート管理部へID、課題番号を渡してレポートファイルのパスを得る
     report_file_path = read_report_file_path(user_id, assignment_id)
 
     '''
@@ -59,29 +59,34 @@ def order_report_file():
     except IOError:
         logging.error("order_report_file: 入出力エラー")
     '''
-        # レポートファイルを開く
+
+    # レポートファイルを開く
     try:
         with open(report_file_path, "rb") as f:
             character_code = chardet.detect(f.read())['encoding']
         report_file = open(report_file_path, "r", encoding=character_code)
+
+    # パーミッションエラー
     except PermissionError:
         logging.error("order_report_file: パーミッションエラー")
+
+    # 入出力エラー
     except IOError:
         logging.error("order_report_file: 入出力エラー")
-
 
     # レポートファイルを読み込む
     report_text_list = report_file.readlines()
     # logging.info("report_text_list"+report_text_list[0])
+
     # レポートのテキストのリストを一つのテキストにする
     # report_text = ""
     # for line in report_text_list:
     #     report_text += line
 
-    # レポート管理部へID、課題情報を渡してフィードバックのテキストを得る
+    # レポート管理部へID、課題番号を渡してフィードバックのテキストを得る
     feedback_text = read_feedback(user_id, assignment_id)
 
-    # 連想配列に追加
+    # 辞書型配列に追加
     result_dict = {
         "report_text_list": report_text_list,
         "feedback_text": feedback_text,
@@ -89,9 +94,10 @@ def order_report_file():
         "user_id": user_id
     }
     # print(report_text)
-    print(feedback_text)
+    # print(feedback_text)
+
     # jsonファイル風にする
     # jsonify_result = jsonify(result_dict)
 
-    # 返す
+    # W12に画面遷移
     return render_template("w12.html", r_dict=result_dict)

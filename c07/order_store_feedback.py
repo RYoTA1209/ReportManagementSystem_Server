@@ -31,14 +31,18 @@ def order_store_feedback():
     # フォームから受け取ったIDを格納
     user_id = request.form['user_id']
 
-    # フォームから受け取った課題情報を格納
+    # フォームから受け取った課題番号を格納
     assignment_id = request.form['assignment_id']
 
     # フォームから受け取ったフィードバックの内容を格納
     feedback_text = request.form['feedback_text']
 
-    # レポート管理部へID、課題情報、フィードバックを渡して論理値を得る
+    # レポート管理部へID、課題番号、フィードバックを渡して論理値を得る
     success = write_feedback(user_id, assignment_id, feedback_text)
 
-    # 論理値の文字列を返す
+    # 理論値で例外処理
+    if success != True:
+        logging.error("order_store_feedback: レポート削除に例外が発生しました。")
+
+    # W5に画面遷移
     return render_template("w5.html")

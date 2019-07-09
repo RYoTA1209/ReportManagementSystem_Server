@@ -15,27 +15,32 @@ app = order_delete_report_app
 @app.route('/sakujo', methods=['GET', 'POST'])
 def order_delete_report():
 
-    # user_idが見つからなかったらエラーを返す
-    # if 'user_id' not in request.form:
-    #     logging.error("order_report_file: user_idをフォームから読み込めませんでした。")
-
     # assignment_idが見つからなかったらエラーを返す
     if 'assignment_id' not in request.form:
         logging.error("order_delete_report: assignment_idをフォームから読み込めませんでした。")
 
-    # 生徒からの閲覧か、指導者からW18空の閲覧かによってuser_idの分岐
+    # 生徒からの閲覧か、指導者からの閲覧かによってuser_idの分岐
     if session["permission"] == 0:
-        # フォームから受け取ったIDを格納
-        # user_id = request.form['user_id']
+        # 生徒の場合はセッションから
         user_id = session["userid"]
-    else:
-        user_id = request.form['user_id']  # w18にはuser_idをformに
 
-    # フォームから受け取った課題情報を格納
+    else:
+        # user_idが見つからなかったらエラーを返す（指導者のみ）
+        if 'user_id' not in request.form:
+            logging.error("order_delete_report: user_idをフォームから読み込めませんでした。")
+
+        # 指導者の場合はフォームから
+        user_id = request.form['user_id']
+
+    # フォームから受け取った課題番号を格納
     assignment_id = request.form['assignment_id']
 
-    # レポート管理部へID、課題情報を渡して論理値を得る
+    # レポート管理部へID、課題番号を渡して論理値を得る
     success = delete_report_from_db_and_server(user_id, assignment_id)
 
-    # 論理値の文字列を返す
+    # 理論値で例外処理
+    if success != True:
+        logging.error("order_delete_report: レポート削除に例外が発生しました。")
+
+    # W5に画面遷移
     return render_template("w5.html")
