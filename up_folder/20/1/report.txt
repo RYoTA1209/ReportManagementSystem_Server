@@ -1,0 +1,26 @@
+課題1
+
+ソースコード
+#include<stdio.h>
+
+int main(void)
+{
+	int i=0;
+	for(i=0;i<10;i++){
+		printf("%d\n",i);
+	}
+	return 0;
+}
+
+実行結果
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
