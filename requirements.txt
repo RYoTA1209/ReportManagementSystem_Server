@@ -8,7 +8,7 @@ itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 mysql-connector-python==8.0.13
-protobuf==3.6.0
+protobuf==3.18.3
 pycparser==2.19
 six==1.12.0
 Werkzeug==0.15.2
